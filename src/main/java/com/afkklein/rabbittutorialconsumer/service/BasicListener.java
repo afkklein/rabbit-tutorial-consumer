@@ -12,7 +12,7 @@ public class BasicListener implements MessageListener {
 
     @Override
     public void onMessage(Message message) {
-        log.info("receive message from " + message.getMessageProperties().getConsumerQueue());
+        log.info("received message from " + message.getMessageProperties().getConsumerQueue());
         String bodyAsString = message.getBody().toString();
         log.info("body " + bodyAsString);
     }

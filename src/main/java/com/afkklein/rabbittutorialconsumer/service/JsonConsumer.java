@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.amqp.support.converter.MessageConverter;
+import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -17,9 +18,9 @@ public class JsonConsumer {
     private final MessageConverter messageConverter;
 
     @RabbitListener(queues = "JSON-QUEUE-BASIC")
-    public void receiveMessageFromJsonQueue(Message message) {
+    public void receiveMessageFromJsonQueue(Person person, Message message) {
         log.info("received message from " + message.getMessageProperties().getConsumerQueue());
-        Person person = (Person) this.messageConverter.fromMessage(message);
         log.info("body " + person);
     }
+
 }
